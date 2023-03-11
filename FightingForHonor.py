@@ -28,8 +28,12 @@ def display_Bg():
     
   
 #Function for drawing the health bars
-def Health_Bar(Health, x, y):  
-  pygame.draw.rect (Screen, Yellow, (x,y, 400,30))
+# bottom bar is character's health in yellow. length of color has to be set to character's health value in order for character to take damage
+def Health_Bar(Health, x, y): 
+  pygame.draw,rect(Screen, White,(x-2,y-2,404,40))
+  pygame.draw.rect (Screen, Red, (x,y, 400,30))
+  pygame.draw.rect (Screen, Yellow, (x,y, Health,30))
+  
     
 #Creates both Characters
 Ronin = Fighter(200,360)
@@ -50,7 +54,7 @@ while run:
     
  #Move the fighters
  Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
- ##################Samurai.Move()
+ ########Samurai.Move()
     
  #Draw Fighters
  Ronin.Draw(Screen)
@@ -66,4 +70,3 @@ while run:
 
 #exit pygame
 pygame.quit()
-
