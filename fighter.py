@@ -4,6 +4,7 @@ import pygame
 
 class Fighter():
  def __init__(self, x, y):
+     self,flip = False
      self.rect = pygame.Rect((x,y,100,200))
      #controls how fast you go up and down(for character jump)
      self.vel_y = 0
@@ -33,18 +34,18 @@ class Fighter():
      
       #Cant preform other movements while attacking        
      if self.attacking == False:
-       pass
+       
        #Directional movement
-     if key[pygame.K_a]:#Left
-       dx = -SPEED
-     if key[pygame.K_d]:#Right
+       if key[pygame.K_a]:#Left
+        dx = -SPEED
+       if key[pygame.K_d]:#Right
         dx = SPEED
       #Jumping   , and statement makes it so that the player can only jump again when on the ground/ no double jump
-     if key[pygame.K_w] and self.jump == False:
+       if key[pygame.K_w] and self.jump == False:
          self.vel_y = -30
          self.jump = True
       #Attack
-     if key[pygame.K_r] or key[pygame.K_t]:
+       if key[pygame.K_r] or key[pygame.K_t]:
          self.attack(surface, target)
        #Determines whether to use attack 1 or 2
          if key[pygame.K_r]:
@@ -73,7 +74,12 @@ class Fighter():
        self.vel_y = 0
        self.jump = False
        dy = screen_height - 40 - self.rect.bottom
-         
+       
+     #ensures players are always facing eachother
+     if target.rect.centerx > self.rect.center:
+       self.flip = False
+     else:
+       self.flip = True   
          
          
      #Update Player Position
@@ -83,7 +89,7 @@ class Fighter():
   #Define attack variable       attack starts from the center of player rectangle, width is multiplied by 2 and overlaps half the rectangle
  def attack(self,surface,target):
     self.attacking = True
-    attacking_range = pygame.Rect(self.rect.centerx, self.rect.y, 2*self.rect.width, self.rect.height)
+    attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2*self.rect.width, self.rect.height)
     pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
