@@ -30,7 +30,7 @@ def display_Bg():
 #Function for drawing the health bars
 # bottom bar is character's health in yellow. length of color has to be set to character's health value in order for character to take damage
 def Health_Bar(Health, x, y): 
-  pygame.draw,rect(Screen, White,(x-2,y-2,404,40))
+  pygame.draw.rect (Screen, White, (x-2,y-2,404,35))
   pygame.draw.rect (Screen, Red, (x,y, 400,30))
   pygame.draw.rect (Screen, Yellow, (x,y, Health,30))
   
