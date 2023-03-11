@@ -14,7 +14,7 @@ class Fighter():
      #defing attack variable
      self.attack_type = 0
      #Defines health
-     self.Health = 100
+     self.Health = 400
            
         
  #Adding Movement To Characters (rectangles), Dx/Dy records the change in those coordinates

@@ -28,8 +28,10 @@ def display_Bg():
     
   
 #Function for drawing the health bars
-def Health_Bar(Health, x, y):  
-  pygame.draw.rect (Screen, Yellow, (x,y, 400,30))
+def Health_Bar(Health, x, y): 
+  pygame.draw.rect (Screen, Red, (x,y, 400,30))
+  pygame.draw.rect (Screen, Yellow, (x,y, Health,30))
+  
     
 #Creates both Characters
 Ronin = Fighter(200,360)
