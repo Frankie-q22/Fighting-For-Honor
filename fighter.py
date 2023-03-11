@@ -13,7 +13,8 @@ class Fighter():
      self.attacking = False 
      #defing attack variable
      self.attack_type = 0
-     #Defines health. Health must be set to length of health bar
+     #Defines health. 
+     # Health must be set to length of health bar
      self.Health = 400
            
         
