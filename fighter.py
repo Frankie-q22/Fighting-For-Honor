@@ -4,7 +4,7 @@ import pygame
 
 class Fighter():
  def __init__(self, x, y):
-     self,flip = False
+     self.flip = False
      self.rect = pygame.Rect((x,y,100,200))
      #controls how fast you go up and down(for character jump)
      self.vel_y = 0
