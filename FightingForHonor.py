@@ -19,8 +19,29 @@ Red = (255,0,0)
 Yellow = (255,255,0)
 White = (255,255,255)
 
+#define the fighter sizes/sprites
+RoninSizeWidth = 195
+RoninSizeHeight = 160
+RoninScale = 3.5
+RoninOffset = [82,71]
+RoninData = [RoninSizeWidth,RoninSizeHeight,RoninScale,RoninOffset]
+SamuraiSizeHeight = 195 
+SamuraiSizeWidth = 160
+SamuraiScale = 3.5
+SamuraiOffset = [85,65]
+SamuraiData = [RoninSizeWidth,SamuraiSizeHeight,SamuraiScale,SamuraiOffset]
+
 #load BackGround Image
-background = pygame.image.load("GateJapan.jpg").convert_alpha()
+background = pygame.image.load("Fighting-For-Honor/GateJapan.jpg").convert_alpha()
+
+#load Spritesheets
+Roninsheet = pygame.image.load("Fighting-For-Honor/FullRonin.png").convert_alpha()
+Samuraisheet =  pygame.image.load("Fighting-For-Honor/FullSamurai.png").convert_alpha()
+
+#steps in each animation
+RoninAnimation = [4,8,2,2,4,4,3,7]
+SamuraiAnimation =[8,8,2,2,6,6,4,6]
+
 #Function that displays background
 def display_Bg():
  scaledBG = pygame.transform.scale(background,(Screen_Width, Screen_Height))
@@ -36,8 +57,8 @@ def Health_Bar(Health, x, y):
   
     
 #Creates both Characters
-Ronin = Fighter(200,360)
-Samurai = Fighter(700,360)
+Ronin = Fighter(200,360,False,RoninData,Roninsheet,RoninAnimation)
+Samurai = Fighter(700,360,True,SamuraiData,Samuraisheet,SamuraiAnimation)
 
 #gameloop
 run = True
@@ -55,7 +76,9 @@ while run:
  #Move the fighters
  Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
  ########Samurai.Move()
-    
+ #updates the sprites for each character
+ Ronin.update()
+ Samurai.update()
  #Draw Fighters
  Ronin.Draw(Screen)
  Samurai.Draw(Screen)
