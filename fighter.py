@@ -1,6 +1,6 @@
 import pygame
 
-#test
+
 
 class Fighter():
  def __init__(self, x, y, flip,Data, Spritesheet,animations):
