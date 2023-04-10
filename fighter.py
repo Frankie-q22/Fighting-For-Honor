@@ -21,8 +21,11 @@ class Fighter():
      self.rect = pygame.Rect((x,y,100,200))
      #controls how fast you go up and down(for character jump)
      self.vel_y = 0
+     #runnig
+     self.running = False
      #makes it so that you can jump a certain distance up
      self.jump = False
+    
      #can attack once per key press
      self.attacking = False 
      #defing attack variable
@@ -33,6 +36,7 @@ class Fighter():
      # Health must be set to length of health bar
 
      self.Health = 400
+     
            
 #load sprites
  def load_sprites (self, Spritesheet,animations):
@@ -52,6 +56,8 @@ class Fighter():
      Gravity = 2
      dx = 0
      dy = 0
+     self.running = False
+     self.attack_type = 0
      
      #get Keypresses that allows keys to move the player
      key = pygame.key.get_pressed()
@@ -62,12 +68,16 @@ class Fighter():
        #Directional movement
        if key[pygame.K_a]:#Left
         dx = -SPEED
+        self.running = True
+        
        if key[pygame.K_d]:#Right
         dx = SPEED
+        self.running = True
       #Jumping   , and statement makes it so that the player can only jump again when on the ground/ no double jump
        if key[pygame.K_w] and self.jump == False:
          self.vel_y = -30
          self.jump = True
+         
       #Attack
        if key[pygame.K_r] or key[pygame.K_t]:
          self.attack(surface, target)
@@ -111,8 +121,22 @@ class Fighter():
      self.rect.y += dy
      
      #Handles Animatiion Updates
+        #Check which action is being preformed
+     if self.attacking == True:
+       if self.attack_type == 1:
+         self.update_action(4) #4: Attack 1
+       elif self.attack_type == 2: 
+         self.update_action(5) #5: Attack 2 
+     elif self.jump == True:
+        self.update_action(2) #2: Jump
+        
+        
+     elif self.running == True:
+       self.update_action(1)#1: Run
+     else:
+       self.update_action(0)#0: Idle
  def update(self):
-  animation_cooldown = 400
+  animation_cooldown = 150
   self.image = self.animation_list [self.action][self.frame_index]
   #check if enough time has passed since last update
   if pygame.time.get_ticks() - self.update_time > animation_cooldown:
@@ -130,8 +154,15 @@ class Fighter():
     pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
-      target.Health -= 10
+      target.Health -= 40
       
+ def update_action(self, new_action):
+   #checks if actions index range from sprites if different from the previous one, such as idle having 4 frames while running has 8
+   if new_action!= self.action:
+     self.action = new_action
+     #update animation settings
+     self.frame_index = 0
+     self.update_time = pygame.time.get_ticks()
      
   #Visually adds the rectangles(soon to be sprite images)
  def Draw(self, surface):

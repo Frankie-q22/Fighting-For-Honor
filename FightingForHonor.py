@@ -20,8 +20,8 @@ Yellow = (255,255,0)
 White = (255,255,255)
 
 #define the fighter sizes/sprites
-RoninSizeWidth = 195
-RoninSizeHeight = 160
+RoninSizeWidth = 200
+RoninSizeHeight = 200
 RoninScale = 3.5
 RoninOffset = [82,71]
 RoninData = [RoninSizeWidth,RoninSizeHeight,RoninScale,RoninOffset]
