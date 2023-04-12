@@ -22,13 +22,13 @@ White = (255,255,255)
 #define the fighter sizes/sprites
 RoninSizeWidth = 200
 RoninSizeHeight = 200
-RoninScale = 3.5
-RoninOffset = [82,71]
+RoninScale = 3.8
+RoninOffset = [90,75.5]
 RoninData = [RoninSizeWidth,RoninSizeHeight,RoninScale,RoninOffset]
-SamuraiSizeHeight = 195 
+SamuraiSizeHeight = 200 
 SamuraiSizeWidth = 160
-SamuraiScale = 3.5
-SamuraiOffset = [85,65]
+SamuraiScale = 4
+SamuraiOffset = [89,72]
 SamuraiData = [RoninSizeWidth,SamuraiSizeHeight,SamuraiScale,SamuraiOffset]
 
 #load BackGround Image
@@ -57,8 +57,8 @@ def Health_Bar(Health, x, y):
   
     
 #Creates both Characters
-Ronin = Fighter(200,360,False,RoninData,Roninsheet,RoninAnimation)
-Samurai = Fighter(700,360,True,SamuraiData,Samuraisheet,SamuraiAnimation)
+Ronin = Fighter(1,200,360,False,RoninData,Roninsheet,RoninAnimation)
+Samurai = Fighter(2,700,360,True,SamuraiData,Samuraisheet,SamuraiAnimation)
 
 #gameloop
 run = True
@@ -75,7 +75,7 @@ while run:
     
  #Move the fighters
  Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
- ########Samurai.Move()
+ Samurai.Move(Screen_Width, Screen_Height,Screen, Ronin)
  #updates the sprites for each character
  Ronin.update()
  Samurai.update()
