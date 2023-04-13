@@ -217,7 +217,7 @@ class Fighter():
  def attack(self,surface,target):
    if self.attack_cooldown == 0:
     self.attacking = True
-    attacking_range = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 3.59*self.rect.width , self.rect.height)
+    attacking_range = pygame.Rect(self.rect.centerx - (4.3 * self.rect.width * self.flip), self.rect.y, 3.59*self.rect.width , self.rect.height)
     pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
