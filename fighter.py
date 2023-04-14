@@ -204,13 +204,13 @@ class Fighter():
       #Check if attack was excecuted 
        if self.action == 4 or self.action == 5:
          self.attacking = False
-         self.attack_cooldown = 30
+         self.attack_cooldown = 20
       #check if damage was taken
        if self.action == 6:
          self.hit = False
       # if you get hit while trying to attack, your attack is interrupted
          self.attacking = False
-         self.attack_cooldown = 30
+         self.attack_cooldown = 20
        
                             #Key Note: Surface is what makes the rectangles show up
   #Define attack variable       attack starts from the center of player rectangle, width is multiplied by 2 and overlaps half the rectangle
@@ -221,7 +221,7 @@ class Fighter():
     pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
-     target.Health -= 40
+     target.Health -= 25
      target.hit = True
       
  def update_action(self, new_action):
