@@ -59,7 +59,7 @@ class Fighter():
         
  #Adding Movement To Characters (rectangles), Dx/Dy records the change in those coordinates
  def Move(self, screen_width,screen_height,surface, target):
-     SPEED = 10
+     SPEED = 15
      Gravity = 2
      dx = 0
      dy = 0
@@ -118,9 +118,9 @@ class Fighter():
          if key[pygame.K_o] or key[pygame.K_p]:
            self.attack(surface, target)
          #Determines whether to use attack 1 or 2
-           if key[pygame.K_o]:
-             self.attack_type = 1
            if key[pygame.K_p]:
+             self.attack_type = 1
+           if key[pygame.K_o]:
              self.attack_type = 2
              
 
@@ -188,7 +188,7 @@ class Fighter():
        
        
  def update(self):
-  animation_cooldown = 150
+  animation_cooldown = 100
   self.image = self.animation_list [self.action][self.frame_index]
   #check if enough time has passed since last update
   if pygame.time.get_ticks() - self.update_time > animation_cooldown:
