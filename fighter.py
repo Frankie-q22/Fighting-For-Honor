@@ -70,7 +70,7 @@ class Fighter():
      key = pygame.key.get_pressed()
      
       #Cant preform other movements while attacking        
-     if self.attacking == False:
+     if self.attacking == False and self.Alive == True:
        #Check Ronin Controls
        if self.Player == 1:
        
@@ -188,7 +188,7 @@ class Fighter():
        
        
  def update(self):
-  animation_cooldown = 100
+  animation_cooldown = 130
   self.image = self.animation_list [self.action][self.frame_index]
   #check if enough time has passed since last update
   if pygame.time.get_ticks() - self.update_time > animation_cooldown:

@@ -19,6 +19,10 @@ Red = (255,0,0)
 Yellow = (255,255,0)
 White = (255,255,255)
 
+#starting counter sequence
+introcount = 3
+lastcountupdate = pygame.time.get_ticks()
+
 #define the fighter sizes/sprites
 RoninSizeWidth = 200
 RoninSizeHeight = 200
@@ -73,9 +77,19 @@ while run:
  Health_Bar(Ronin.Health, 20,20)
  Health_Bar(Samurai.Health, 580,20)
     
- #Move the fighters
- Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
- Samurai.Move(Screen_Width, Screen_Height,Screen, Ronin)
+#update countdown
+ if introcount <=0:
+   
+    #Move the fighters
+   Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
+   Samurai.Move(Screen_Width, Screen_Height,Screen, Ronin)
+ else:
+   # Update count timer
+   if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
+     introcount -= 1
+     lastcountupdate = pygame.time.get_ticks()
+     print(introcount)
+ 
  #updates the sprites for each character
  Ronin.update()
  Samurai.update()
