@@ -19,10 +19,13 @@ Red = (255,0,0)
 Yellow = (255,255,0)
 White = (255,255,255)
 
-#starting counter sequence
+#starting counter sequence (and points)
 introcount = 3
 lastcountupdate = pygame.time.get_ticks()
-
+#player score
+score = [0,0]
+Round_over = False
+Round_over_cooldown = 2000
 #define the fighter sizes/sprites
 RoninSizeWidth = 200
 RoninSizeHeight = 200
@@ -46,6 +49,14 @@ Samuraisheet =  pygame.image.load("Fighting-For-Honor/FullSamurai.png").convert_
 RoninAnimation = [4,8,2,2,4,4,3,7]
 SamuraiAnimation =[8,8,2,2,6,6,4,6]
 
+#define the font
+countingfont = pygame.font.Font("Fighting-For-Honor/Turok.ttf",150)
+scorefont = pygame.font.Font("Fighting-For-Honor/Turok.ttf",40)
+
+#Drawing the counter and point system
+def lettersnumbers(text,font,text_color,x,y):
+  img = font.render(text,True,text_color)
+  Screen.blit (img, (x, y))
 #Function that displays background
 def display_Bg():
  scaledBG = pygame.transform.scale(background,(Screen_Width, Screen_Height))
@@ -84,6 +95,8 @@ while run:
    Ronin.Move(Screen_Width, Screen_Height,Screen, Samurai)
    Samurai.Move(Screen_Width, Screen_Height,Screen, Ronin)
  else:
+   #Displays count timer
+   lettersnumbers(str(introcount), countingfont, Yellow, Screen_Width/2.1, Screen_Height/5)
    # Update count timer
    if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
      introcount -= 1
@@ -93,9 +106,27 @@ while run:
  #updates the sprites for each character
  Ronin.update()
  Samurai.update()
+ 
+ 
+ 
  #Draw Fighters
  Ronin.Draw(Screen)
  Samurai.Draw(Screen)
+ 
+ 
+ #CHeck for player death/defeat
+ if Round_over == False:
+   if Ronin.Alive == False:
+     score[1] += 1
+     Round_over = True
+     Round_over_time = pygame.time.get_ticks()
+     print(score)
+   elif Samurai.Alive == False:
+     score[0] += 1
+     Round_over = True
+     Round_over_time = pygame.time.get_ticks()
+     print(score)
+ else: pass
  #event handler
  for event in pygame.event.get():
      if event.type == pygame.QUIT:
