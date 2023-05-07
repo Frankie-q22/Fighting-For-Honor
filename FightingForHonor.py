@@ -116,7 +116,7 @@ while run:
    if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
      introcount -= 1
      lastcountupdate = pygame.time.get_ticks()
-     print(introcount)
+    # print(introcount)
    
  
  #updates the sprites for each character
@@ -146,12 +146,13 @@ while run:
      score[0] += 1
      Round_over = True
      Round_over_time = pygame.time.get_ticks()
-     print(score)
+     #print(score)
  else:
    if pygame.time.get_ticks() - Round_over_time > Round_over_cooldown:
        Round_over = False
        introcount = 3
-       endcount = 5
+       endcount = 5 
+       
        Ronin = Fighter(1,200,360,False,RoninData,Roninsheet,RoninAnimation)
        Samurai = Fighter(2,700,360,True,SamuraiData,Samuraisheet,SamuraiAnimation)
    if Ronin.Alive == False:
@@ -161,7 +162,8 @@ while run:
      if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
       endcount -= 1
       lastcountupdate = pygame.time.get_ticks()
-      print(endcount)
+      #print(endcount)
+      
    if Samurai.Alive ==False:
      lettersnumbers(str(Ronin_Wins), Wins, Red, Screen_Width/4, Screen_Height/3)
      lettersnumbers(str(Ronin_Wins), WinsSmaller, White, Screen_Width/4, Screen_Height/3)
@@ -169,8 +171,8 @@ while run:
      if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
       endcount -= 1
       lastcountupdate = pygame.time.get_ticks()
-      print(endcount)
-   
+      #print(endcount)
+      
  #event handler
  for event in pygame.event.get():
      if event.type == pygame.QUIT:
