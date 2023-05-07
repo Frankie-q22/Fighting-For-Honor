@@ -19,13 +19,15 @@ Red = (255,0,0)
 Yellow = (255,255,0)
 White = (255,255,255)
 
-#starting counter sequence (and points)
+#starting /end counter sequence (and points)
 introcount = 3
+endcount = 5
 lastcountupdate = pygame.time.get_ticks()
 #player score
 score = [0,0]
 Round_over = False
-Round_over_cooldown = 2000
+Round_over_cooldown = 5000
+
 #define the fighter sizes/sprites
 RoninSizeWidth = 200
 RoninSizeHeight = 200
@@ -41,6 +43,10 @@ SamuraiData = [RoninSizeWidth,SamuraiSizeHeight,SamuraiScale,SamuraiOffset]
 #load BackGround Image
 background = pygame.image.load("Fighting-For-Honor/GateJapan.jpg").convert_alpha()
 
+#Load Victory Text
+def Victory(text,font,text_color,x,y):
+  Vicimg = font.render(text,True,text_color)
+  Screen.blit(Vicimg,(x,y))
 #load Spritesheets
 Roninsheet = pygame.image.load("Fighting-For-Honor/FullRonin.png").convert_alpha()
 Samuraisheet =  pygame.image.load("Fighting-For-Honor/FullSamurai.png").convert_alpha()
@@ -52,6 +58,10 @@ SamuraiAnimation =[8,8,2,2,6,6,4,6]
 #define the font
 countingfont = pygame.font.Font("Fighting-For-Honor/Turok.ttf",150)
 scorefont = pygame.font.Font("Fighting-For-Honor/Turok.ttf",40)
+Wins = pygame.font.Font("Fighting-For-Honor/Turok.ttf",50)
+WinsSmaller = pygame.font.Font("Fighting-For-Honor/Turok.ttf",49)
+
+
 
 #Drawing the counter and point system
 def lettersnumbers(text,font,text_color,x,y):
@@ -62,6 +72,8 @@ def display_Bg():
  scaledBG = pygame.transform.scale(background,(Screen_Width, Screen_Height))
  Screen.blit(scaledBG,(0,0))
     
+    
+ 
   
 #Function for drawing the health bars
 # bottom bar is character's health in yellow. length of color has to be set to character's health value in order for character to take damage
@@ -87,7 +99,9 @@ while run:
  #Show Health Bars
  Health_Bar(Ronin.Health, 20,20)
  Health_Bar(Samurai.Health, 580,20)
-    
+#player points
+ lettersnumbers("Ronin: "+(str(score[0])), scorefont,White,20,60)
+ lettersnumbers("Samurai: "+(str(score[1])), scorefont,White,800,60)
 #update countdown
  if introcount <=0:
    
@@ -97,11 +111,13 @@ while run:
  else:
    #Displays count timer
    lettersnumbers(str(introcount), countingfont, Yellow, Screen_Width/2.1, Screen_Height/5)
+
    # Update count timer
    if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
      introcount -= 1
      lastcountupdate = pygame.time.get_ticks()
      print(introcount)
+   
  
  #updates the sprites for each character
  Ronin.update()
@@ -113,20 +129,48 @@ while run:
  Ronin.Draw(Screen)
  Samurai.Draw(Screen)
  
+ Ronin_Wins = 'The Samurai Fought Honorably' 
+ Samurai_Wins = 'The Ronin Fought Honorably'
+    
+ 
  
  #CHeck for player death/defeat
  if Round_over == False:
    if Ronin.Alive == False:
-     score[1] += 1
+     
      Round_over = True
      Round_over_time = pygame.time.get_ticks()
-     print(score)
+     score[1] += 1
+       
    elif Samurai.Alive == False:
      score[0] += 1
      Round_over = True
      Round_over_time = pygame.time.get_ticks()
      print(score)
- else: pass
+ else:
+   if pygame.time.get_ticks() - Round_over_time > Round_over_cooldown:
+       Round_over = False
+       introcount = 3
+       endcount = 5
+       Ronin = Fighter(1,200,360,False,RoninData,Roninsheet,RoninAnimation)
+       Samurai = Fighter(2,700,360,True,SamuraiData,Samuraisheet,SamuraiAnimation)
+   if Ronin.Alive == False:
+     lettersnumbers(str(Samurai_Wins), Wins, Red, Screen_Width/4, Screen_Height/3)
+     lettersnumbers(str(Samurai_Wins), WinsSmaller, White, Screen_Width/4, Screen_Height/3)
+     lettersnumbers(str(endcount), Wins, Red, Screen_Width/2.1, Screen_Height/12)
+     if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
+      endcount -= 1
+      lastcountupdate = pygame.time.get_ticks()
+      print(endcount)
+   if Samurai.Alive ==False:
+     lettersnumbers(str(Ronin_Wins), Wins, Red, Screen_Width/4, Screen_Height/3)
+     lettersnumbers(str(Ronin_Wins), WinsSmaller, White, Screen_Width/4, Screen_Height/3)
+     lettersnumbers(str(endcount), Wins, Red, Screen_Width/2.1, Screen_Height/12)
+     if (pygame.time.get_ticks() - lastcountupdate) >= 1000:
+      endcount -= 1
+      lastcountupdate = pygame.time.get_ticks()
+      print(endcount)
+   
  #event handler
  for event in pygame.event.get():
      if event.type == pygame.QUIT:

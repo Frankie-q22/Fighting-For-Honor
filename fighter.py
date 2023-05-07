@@ -43,7 +43,8 @@ class Fighter():
 
      self.Health = 400
      self.Alive = True
-     
+     #SCORE
+     self.Score = 0
            
 #load sprites
  def load_sprites (self, Spritesheet,animations):
@@ -221,7 +222,7 @@ class Fighter():
     pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
-     target.Health -= 25
+     target.Health -= 400
      target.hit = True
       
  def update_action(self, new_action):
