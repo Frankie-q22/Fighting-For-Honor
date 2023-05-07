@@ -222,7 +222,7 @@ class Fighter():
     #pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
-     target.Health -= 400
+     target.Health -= 33.34
      target.hit = True
       
  def update_action(self, new_action):
