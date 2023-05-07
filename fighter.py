@@ -219,10 +219,10 @@ class Fighter():
    if self.attack_cooldown == 0:
     self.attacking = True
     attacking_range = pygame.Rect(self.rect.centerx - (4.3 * self.rect.width * self.flip), self.rect.y, 3.59*self.rect.width , self.rect.height)
-    pygame.draw.rect(surface,(0,255,0), attacking_range)
+    #pygame.draw.rect(surface,(0,255,0), attacking_range)
   #basically registers player hitting player
     if attacking_range.colliderect(target.rect):
-     target.Health -= 400
+     target.Health -= 33.334
      target.hit = True
       
  def update_action(self, new_action):
@@ -236,5 +236,5 @@ class Fighter():
   #Visually adds the rectangles(soon to be sprite images)
  def Draw(self, surface):
    img = pygame.transform.flip(self.image, self.flip, False)
-   pygame.draw.rect(surface, (255,0,0), self.rect)
+   #pygame.draw.rect(surface, (255,0,0), self.rect)
    surface.blit(img,(self.rect.x - (self.Offset[0] * self.ImageScale), self.rect.y -(self.Offset[1] * self.ImageScale)))
