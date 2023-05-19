@@ -42,7 +42,6 @@ SamuraiData = [RoninSizeWidth,SamuraiSizeHeight,SamuraiScale,SamuraiOffset]
 
 #load BackGround Image
 background = pygame.image.load("Fighting-For-Honor/GateJapan.jpg").convert_alpha()
-
 #load Spritesheets
 Roninsheet = pygame.image.load("Fighting-For-Honor/FullRonin.png").convert_alpha()
 Samuraisheet =  pygame.image.load("Fighting-For-Honor/FullSamurai.png").convert_alpha()
